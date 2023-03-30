@@ -8,7 +8,7 @@ import threading
 import json
 
 import src.db_handler as dbh
-from logger import logger
+# from logger import logger
 
 
 dotenv_path = find_dotenv()
@@ -16,6 +16,7 @@ load_dotenv(dotenv_path)
 
 app = FastAPI()
 
+@app.get("/")
 def hello_world():
     return 'hi hi hi!'
 
@@ -24,16 +25,16 @@ def hello_world():
 # def healthcheck():
 #     return {"status": "ok"}
 #
-#
-# @app.post("/vendor-assignment")
-# async def vendor_assignment(request: Request):
-#     body = await request.json()
-#     response, json_vendors, state = execute(body)
-#     if json_vendors:
-#         thread = threading.Thread(target=dbh.execute_to_db, kwargs={
-#             'jsono': response, 'jsoni': body, 'output_vendors': json_vendors, 'state': state})
-#         thread.start()
-#     return response
+
+@app.post("/vendor-assignment")
+async def vendor_assignment(request: Request):
+    body = await request.json()
+    response, json_vendors, state = execute(body)
+    if json_vendors:
+        thread = threading.Thread(target=dbh.execute_to_db, kwargs={
+            'jsono': response, 'jsoni': body, 'output_vendors': json_vendors, 'state': state})
+        thread.start()
+    return response
 #
 #
 # # app.include_router(app, prefix="/vendor-assignment")
@@ -102,8 +103,11 @@ def hello_world():
 #     thread.start()
 
 
+
 if __name__ == "__main__":
+    # hello_world()
     Thread(target=hello_world, daemon=True).start()
     uvicorn.run(app, host='0.0.0.0', port=8080)
 
     # run_test()
+

@@ -191,7 +191,7 @@ def read_from_db(category, possible_vendors):
 
 
 def execute_to_db(**kwargs):
-    logger.info("execute_to_db: ")
+    logger.log("execute_to_db: ")
     ts = datetime.datetime.now()
 
     # response
@@ -223,5 +223,5 @@ def execute_to_db(**kwargs):
     conn.commit()
     conn.close()
 
-    logger.info("execute_to_db is done")
+    logger.log("execute_to_db is done")
 

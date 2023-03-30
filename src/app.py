@@ -6,20 +6,20 @@ import json
 
 def execute(data:dict):
     my_json_str = json.dumps(data)
-    logger.info('event parameter: {}'.format(my_json_str))
+    logger.log('event parameter: {}'.format(my_json_str))
     # print("Received event: " + json.dumps(event, indent=2))
     body_check = data
     body = body_check
     if isinstance(body_check, str):
         body = json.loads(body_check)
-    logger.info("Received body:  " + str(my_json_str))
+    logger.log("Received body:  " + str(my_json_str))
     try:
         vendor_dict, output_json, chosen_vendor_state = fr.run_flow(body)
         output_json = output_json.replace("'", "''")
         return vendor_dict, output_json, chosen_vendor_state
     except Exception as e:
-        logger.error(e)
-        logger.error(json.dumps({'error': str(e)}))
+        logger.log(e)
+        logger.log(json.dumps({'error': str(e)}))
         json_dict = {
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})

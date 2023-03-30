@@ -27,18 +27,18 @@ ms_dev_datasource = '172.31.19.15'
 
 
 def importDataFromPG(query):
-    logger.info('Connecting to SQL')
+    logger.log('Connecting to SQL')
     try:
         conn = psycopg2.connect(host=HOST,
                                 database=DBNAME, user=USER, password=PASSWORD)
     except (Exception, psycopg2.DatabaseError) as error:
-        logger.error("Error: %s" % error)
+        logger.log("Error: %s" % error)
         raise error
 
     # print('[INFO]: Connected to SQL...')
     # print('[INFO]: Executing Query...' + query)
     data = pd.read_sql_query(query, conn)
-    logger.info('Query is Done...')
+    logger.log('Query is Done...')
     return data
 
 
@@ -62,7 +62,7 @@ def connectoToSQLNew(database=None):
 def connectoToSQL(DEV=False):
     # server = '172.31.25.110'
     if DEV == True:
-        logger.info('[INFO]: A DEV BILL')
+        logger.log('[INFO]: A DEV BILL')
         return pyodbc.connect(
             'DRIVER={SQL Server};SERVER=' + ms_dev_datasource + ';DATABASE=' + ms_dev_database + ';UID=' + ms_user + ';PWD=' + ms_pass)
     else:

@@ -3,7 +3,7 @@ import configuration as config
 from logger import logger
 
 def handle_new_vendors(df_vendors:pd.DataFrame, last_assigned_vendor_id):
-    logger.info("find new vendor")
+    logger.log("find new vendor")
 
     new_vendors_df = df_vendors.loc[df_vendors[config.TOTAL_NUMBER_OF_PROJECTS] <= config.NUMBER_OF_MIN_PROJECTS_FOR_NEW_VENDOR]
     if len(new_vendors_df) == 0:

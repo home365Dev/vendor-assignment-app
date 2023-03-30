@@ -21,4 +21,4 @@ logger = CloudWatchLogger(log_group='Vendor_Assignment_App', log_stream='convers
 #     logger.setLevel(logging.DEBUG)
 # else:
 #     logger.setLevel(logging.INFO)
-logger.info("Log has started")
+# logger.log("Log has started")

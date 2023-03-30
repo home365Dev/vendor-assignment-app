@@ -32,7 +32,7 @@ def _normalize_values(df_old_vendors:pd.DataFrame):
 
 
 def handler_old_vendors(df_vendors:pd.DataFrame, last_assigned_vendor_id):
-    logger.info("handle old vendors")
+    logger.log("handle old vendors")
 
     ## filter out the new vendors
     df_old_vendors = df_vendors.loc[df_vendors[config.TOTAL_NUMBER_OF_PROJECTS] > config.NUMBER_OF_MIN_PROJECTS_FOR_NEW_VENDOR]
@@ -47,11 +47,11 @@ def handler_old_vendors(df_vendors:pd.DataFrame, last_assigned_vendor_id):
 
     ## if the vendor is reassigned
     if last_assigned_vendor_id == config.NO_VENDOR_ID:
-        logger.info("vendor chosen: " + str(df_old_vendors.loc[0]))
+        logger.log("vendor chosen: " + str(df_old_vendors.loc[0]))
         chosen_vendor = df_old_vendors.loc[0]
     else:
         winning_vendor =_get_vendor_by_queue(df_old_vendors, last_assigned_vendor_id)
-        logger.info("vendor chosen: " + str(winning_vendor))
+        logger.log("vendor chosen: " + str(winning_vendor))
         chosen_vendor = winning_vendor
 
     chosen_vendor = chosen_vendor.fillna('')

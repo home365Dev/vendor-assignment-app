@@ -106,7 +106,7 @@ def run_flow(body:dict):
     # df_vendors = _retrieve_vendors_from_csv()
     df_vendors_all = _retrieve_vendors(category, possible_vendors)
     if len(df_vendors_all) == 0:
-        logger.info("no vendors found")
+        logger.log("no vendors found")
         return {'1': 'no pro_auto_assign vendors found'}, json.dumps({}), None
     if test:
         resp, a_resp = dev_answer(possible_vendors, body['category'])
@@ -133,7 +133,7 @@ def run_flow(body:dict):
     df_all_vendors_js = vendor_df_sorted_for_js.to_json(orient='records')
 
     if config.IS_TEST:
-        logger.info('and the winning vendor is {}'.format(chosen_vendor))
+        logger.log('and the winning vendor is {}'.format(chosen_vendor))
 
     vendor_to_dict = pd.Series.to_dict(chosen_vendor)
     vendor_to_dict['date_added'] = str(vendor_to_dict["date_added"])
