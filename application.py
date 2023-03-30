@@ -16,7 +16,6 @@ load_dotenv(dotenv_path)
 
 app = FastAPI()
 
-@app.get("/")
 def hello_world():
     return 'hi hi hi!'
 
